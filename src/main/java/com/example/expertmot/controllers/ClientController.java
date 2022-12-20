@@ -1,13 +1,13 @@
-package com.example.expertmot;
+package com.example.expertmot.controllers;
 
-import com.example.expertmot.User;
-import com.example.expertmot.ClientNotFoundException;
-import com.example.expertmot.UserRepository;
+import com.example.expertmot.domain.User;
+import com.example.expertmot.exceptions.ClientNotFoundException;
+import com.example.expertmot.repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/api")
 @RestController
 public class ClientController {

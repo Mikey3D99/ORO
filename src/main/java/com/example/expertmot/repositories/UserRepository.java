@@ -1,9 +1,8 @@
-package com.example.expertmot;
+package com.example.expertmot.repositories;
 
+import com.example.expertmot.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     //List<ClientsEntity> findByPublished(boolean published);
 }

@@ -1,4 +1,4 @@
-package com.example.expertmot;
+package com.example.expertmot.exceptions;
 
 public class ClientNotFoundException extends Exception {
     public ClientNotFoundException(Long id) {
