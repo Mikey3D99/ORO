@@ -41,5 +41,16 @@ public class ClientController {
     void deleteEmployee(@PathVariable Long id) {
         repository.deleteById(id);
     }
-
+    @PutMapping("/clients/{id}")
+    public User updateClient(@RequestBody User updatedClient, @PathVariable Long id) throws ClientNotFoundException {
+        return repository.findById(id)
+                .map(client -> {
+                    client.setFirstName(updatedClient.getFirstName());
+                    client.setLastName(updatedClient.getLastName());
+                    client.setEmail(updatedClient.getEmail());
+                    client.setAge(updatedClient.getAge());
+                    return repository.save(client);
+                })
+                .orElseThrow(() -> new ClientNotFoundException(id));
+    }
 }
