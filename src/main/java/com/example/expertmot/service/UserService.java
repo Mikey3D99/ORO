@@ -1,21 +1,23 @@
 package com.example.expertmot.service;
 
+import com.example.expertmot.domain.Meeting;
 import com.example.expertmot.domain.User;
 import com.example.expertmot.exceptions.ClientNotFoundException;
 import com.example.expertmot.repositories.UserRepository;
+import com.example.expertmot.repositories.MeetingRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final MeetingRepository meetingRepository;
 
-    public UserService( UserRepository userRepository) {
+    public UserService(UserRepository userRepository, MeetingRepository meetingRepository) {
         this.userRepository = userRepository;
+        this.meetingRepository = meetingRepository;
     }
 
     public String authenticateUser(User user) throws ClientNotFoundException{
@@ -43,6 +45,10 @@ public class UserService {
         user.setPassword(encrypted);
         userRepository.save(user);
         return user;
+    }
+
+    public void addMeeting(Meeting meeting){
+        meetingRepository.save(meeting);
     }
 
 }

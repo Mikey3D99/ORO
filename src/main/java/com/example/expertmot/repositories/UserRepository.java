@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     //List<ClientsEntity> findByPublished(boolean published);
-
-    @Query("SELECT meetings FROM User meetings WHERE meetings.id = ?1")
-    List<Meeting> findMeetings(Long clientId);
+    @Query("SELECT meetings FROM Meeting meetings WHERE meetings.user = ?1")
+    List<Meeting> findMeetings(User clientId);
 }

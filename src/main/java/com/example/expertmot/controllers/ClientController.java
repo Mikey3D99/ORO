@@ -3,6 +3,7 @@ package com.example.expertmot.controllers;
 import com.example.expertmot.domain.Meeting;
 import com.example.expertmot.domain.User;
 import com.example.expertmot.exceptions.ClientNotFoundException;
+import com.example.expertmot.repositories.MeetingRepository;
 import com.example.expertmot.repositories.UserRepository;
 import com.example.expertmot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,16 @@ public class ClientController {
     // end::get-aggregate-root[]
 
     @GetMapping("/clients/{id}/meetings")
-    public List<Meeting> findMeetings(@RequestParam Long userId) { return repository.findMeetings(userId);}
+    public List<Meeting> findMeetings(@PathVariable("id") User user_id) { return repository.findMeetings(user_id);}
+
+    @PostMapping("/clients/{id}/meetings")
+    public void postMeeting(@RequestBody Meeting newMeeting, @PathVariable("id") User user_id){
+        Meeting meeting = new Meeting(newMeeting.getDate(), newMeeting.getCity(), newMeeting.getStreet(), newMeeting.getStreetNumber(), newMeeting.getHouseNumber(), user_id);
+        userService.addMeeting(meeting);
+    }
 
     @PostMapping("/clients")
-    public User createNewClient(@RequestBody User newClient) {
-        return userService.saveUser(newClient);
-    }
+    public User createNewClient(@RequestBody User newClient) {return userService.saveUser(newClient);}
 
     @PostMapping("/authenticateUsers")
     public String authenticateUser(@RequestBody User user) throws ClientNotFoundException {

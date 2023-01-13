@@ -1,12 +1,26 @@
 package com.example.expertmot.domain;
 
 import jakarta.persistence.*;
-
+import jakarta.persistence.criteria.CriteriaBuilder;
+import com.example.expertmot.domain.User;
 import java.sql.Date;
 
 @Entity
 @Table(name = "meeting")
 public class Meeting {
+
+    public Meeting() {
+        super();
+    }
+    public Meeting(Date date, String city, String street, String streetNumber, Integer houseNumber, User userId) {
+        super();
+        this.date = date;
+        this.city = city;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.houseNumber = houseNumber;
+        this.user = userId;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -15,7 +29,7 @@ public class Meeting {
     // @Column(name = "user_id", nullable = false)
     //private Long user_id;
 
-    @Column(name = "date", nullable = true, length = Integer.MAX_VALUE)
+    @Column(name = "date", nullable = false, length = Integer.MAX_VALUE)
     private Date date;
 
     @Column(name = "city", nullable = false, length = Integer.MAX_VALUE)
@@ -79,5 +93,9 @@ public class Meeting {
 
     public void setHouseNumber(Integer houseNumber) {
         this.houseNumber = houseNumber;
+    }
+
+    public User getUserId() {
+        return user;
     }
 }

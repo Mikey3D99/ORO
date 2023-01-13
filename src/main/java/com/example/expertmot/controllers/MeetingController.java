@@ -25,10 +25,8 @@ public class MeetingController {
 
     // end::get-aggregate-root[]
 
-    @PostMapping("/clients/{user_id}/meetings")
-    public Meeting createNewMeeting(@RequestBody Meeting newMeeting) {
-        return repository.save(newMeeting);
-    }
+    //@PostMapping("/clients/{user_id}/meetings")
+    //public Meeting createNewMeeting(@RequestBody Meeting newMeeting) {return repository.save(newMeeting);}
 
     // Single item
     @GetMapping("/clients/{user_id}/meetings/{id}")
