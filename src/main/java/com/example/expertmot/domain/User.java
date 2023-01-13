@@ -2,6 +2,8 @@ package com.example.expertmot.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,6 +23,9 @@ public class User {
 
     @Column(name = "age", nullable = false)
     private Integer age;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Meeting> meetings;
 
     public Long getId() {
         return id;

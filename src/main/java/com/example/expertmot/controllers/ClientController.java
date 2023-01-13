@@ -1,5 +1,6 @@
 package com.example.expertmot.controllers;
 
+import com.example.expertmot.domain.Meeting;
 import com.example.expertmot.domain.User;
 import com.example.expertmot.exceptions.ClientNotFoundException;
 import com.example.expertmot.repositories.UserRepository;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/api")
 @RestController
 public class ClientController {
@@ -24,6 +25,9 @@ public class ClientController {
         return repository.findAll();
     }
     // end::get-aggregate-root[]
+
+    @GetMapping("/clients/{id}/meetings")
+    public List<Meeting> findMeetings(@RequestParam Long userId) { return repository.findMeetings(userId);}
 
     @PostMapping("/clients")
     public User createNewClient(@RequestBody User newClient) {
