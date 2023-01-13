@@ -3,6 +3,8 @@ package com.example.expertmot.controllers;
 import com.example.expertmot.domain.User;
 import com.example.expertmot.exceptions.ClientNotFoundException;
 import com.example.expertmot.repositories.UserRepository;
+import com.example.expertmot.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +14,11 @@ import java.util.List;
 @RestController
 public class ClientController {
     private final UserRepository repository;
+    final UserService userService;
 
-    public ClientController(UserRepository repository) {
+    public ClientController(UserRepository repository, UserService userService) {
         this.repository = repository;
+        this.userService = userService;
     }
 
     // Aggregate root
@@ -27,7 +31,7 @@ public class ClientController {
 
     @PostMapping("/clients")
     public User createNewClient(@RequestBody User newClient) {
-        return repository.save(newClient);
+        return userService.saveUser(newClient);
     }
 
     // Single item

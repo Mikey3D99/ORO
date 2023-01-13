@@ -22,6 +22,19 @@ public class User {
     @Column(name = "age", nullable = false)
     private Integer age;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+    public User() { }
+
+    public User(Long id, String firstName, String lastName, String email, Integer age, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
@@ -33,6 +46,7 @@ public class User {
     public String getFirstName() {
         return firstName;
     }
+
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -62,4 +76,13 @@ public class User {
         this.age = age;
     }
 
+    // it is not a good practice to expose a password getter
+    // it is better to only set the password
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
