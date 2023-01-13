@@ -33,6 +33,11 @@ public class UserService {
 
     public User saveUser(User user) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        if(user.getPassword() == null){
+            user.setPassword("default");
+        }
+
         String encrypted = bCryptPasswordEncoder.encode(user.getPassword());
 
         user.setPassword(encrypted);

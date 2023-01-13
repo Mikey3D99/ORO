@@ -34,6 +34,11 @@ public class ClientController {
         return userService.saveUser(newClient);
     }
 
+    @PostMapping("/authenticateUsers")
+    public String authenticateUser(@RequestBody User user) throws ClientNotFoundException {
+        return userService.authenticateUser(user);
+    }
+
     // Single item
     @GetMapping("/clients/{id}")
     public User one(@PathVariable Long id) throws ClientNotFoundException {
